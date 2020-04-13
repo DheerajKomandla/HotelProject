@@ -1,25 +1,10 @@
-﻿@model Team_1.Models.tblBooking
+@model Team_1.Models.tblBooking
 @{
     ViewBag.Title = "booking";
     
 
 }
 
-
-    <table>
-        <tr>
-            <th>
-                @Html.ActionLink("Search for hotel", "SearchHotelNew", "Team1")
-            </th>
-            <th>
-                @Html.ActionLink("Book for a hotel", "booking", "Team1")
-            </th>
-            <th>
-                @Html.ActionLink("Logout", "Logout", "Team1")
-            </th>
-        </tr>
-        
-    </table>
     <center><h2>----Booking----</h2></center>
 @using (Html.BeginForm("booking1", "Team1"))
 {
@@ -29,7 +14,7 @@
     <tr>
         <th>CustomerID</th>
         <td>
-            @Html.TextBoxFor(a => a.Customer_ID)
+            @Html.TextBoxFor(a => a.Customer_ID, new { Value = ViewBag.x })
         @Html.ValidationMessageFor(a => a.Customer_ID, "", new { @class = "text-danger" })
     </td>
 
