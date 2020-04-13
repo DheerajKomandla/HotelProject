@@ -1,15 +1,17 @@
-﻿
+
 @{
     ViewBag.Title = "gettingbookingdetails";
-   
+
 }
 
-    <center><h2>----Your Bookings----</h2></center>
+<center><h2>----Your Bookings----</h2></center>
 @using (Html.BeginForm())
 {
-<link href="~/Mystyle/table.css" rel="stylesheet" />
+    <link href="~/Mystyle/table.css" rel="stylesheet" />
+    if (ViewBag.List != null)
+    {
     <table border="1" align="center">
-
+        
         <tr>
             <th>Booking_ID</th>
             <th>Customer_ID</th>
@@ -26,7 +28,7 @@
             <th>Delete</th>
         </tr>
 
-        @foreach (var e in Model)
+        @foreach (var e in ViewBag.List)
         {
             <tr>
                 <td>@e.Booking_ID</td>
@@ -45,12 +47,22 @@
             </tr>
 
         }
+        
     </table>
-    <h4>@Html.ActionLink("back","booking","Team1")</h4>
-    if (ViewBag.msg != null)
+    }
+    else
+    {
+    
+
+<h4 style="color:red;font:bold"> @ViewBag.msg</h4>  
+    
+    }
+
+    <h4>@Html.ActionLink("back", "booking", "Team1")</h4>
+    @*if (ViewBag.msg != null)
     {
         @ViewBag.msg;
-    }
+    }*@
 }
 
 
