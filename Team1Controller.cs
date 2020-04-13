@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -48,15 +48,11 @@ namespace Team_1.Controllers
                     {
                         return RedirectToAction("Login1");
 
-
-
-
-
-
                     }
                     else if (t1.UserType == "Customer")
                     {
                         Session["customerid"] = t1;
+                        Session["id"] = t1.UserId;
                         return RedirectToAction("SearchHotelNew");
                     }
                     else
@@ -64,62 +60,15 @@ namespace Team_1.Controllers
                         return RedirectToAction("Login");
                     }
 
-
-
-
-
-
                 }
                 else
                      ViewBag.msg = "Invalid credentials";
                          return View("Login");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
-
-
 
            
             return View("Login");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
            
@@ -206,16 +155,7 @@ namespace Team_1.Controllers
             else
                 return View("CustomerLogin");
             
-
-
-
-
-
-
-
         }
-
-        
         
 
         public ActionResult Logout()// this actionmethod lets the user comeout of the particular page and sessionvariables are used to remove that particular session when userlogouts
@@ -303,6 +243,7 @@ namespace Team_1.Controllers
         }
         public ActionResult booking()                      //booking values user will enter through booking view
         {
+            ViewBag.x = Session["id"];
             return View();
 
         }
@@ -379,8 +320,18 @@ namespace Team_1.Controllers
             tblLogin c = (tblLogin)Session["customerid"];
             string s = c.UserId;
             P = Dbclass.gettingallbooking(s);                //here all booking values are brought through this gettingallbooking method
+            if(P.Count==0)
+            {
+                ViewBag.List = null;
+                ViewBag.msg = "No Booking are there ";
+            }
+            else
+            {
+                ViewBag.List = P;
+            }
 
-            return View(P);
+
+            return View();
             //return View();
         }
 
@@ -419,36 +370,13 @@ namespace Team_1.Controllers
                     ViewBag.city = new SelectList(CityList, "CITY_NAME", "CITY_NAME");
                     return PartialView("DisplayCities");
 
-
                 }
 
             }
 
-
             return View("Insert");
 
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
